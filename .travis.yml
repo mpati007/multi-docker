@@ -4,18 +4,18 @@ services:
   - docker
 
 before_install: 
-  - docker build -t mpati007/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t manaspati/react-test -f ./client/Dockerfile.dev ./client
 
 script: 
-  - docker run -e CI=true mpati007/react-test npm test
+  - docker run -e CI=true manaspati/react-test npm test
 
 after_success:
-  - docker build -t mpati007/multi-client ./client
-  - docker build -t mpati007/multi-nginx ./nginx
-  - docker build -t mpati007/multi-server ./server
-  - docker build -t mpati007/multi-worker ./worker
+  - docker build -t manaspati/multi-client ./client
+  - docker build -t manaspati/multi-nginx ./nginx
+  - docker build -t manaspati/multi-server ./server
+  - docker build -t manaspati/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push mpati007/multi-client
-  - docker push mpati007/multi-nginx
-  - docker push mpati007/multi-server
-  - docker push mpati007/multi-worker
+  - docker push manaspati/multi-client
+  - docker push manaspati/multi-nginx
+  - docker push manaspati/multi-server
+  - docker push manaspati/multi-worker
